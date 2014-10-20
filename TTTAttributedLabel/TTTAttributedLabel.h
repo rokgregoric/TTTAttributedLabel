@@ -442,4 +442,15 @@ didSelectLinkWithTransitInformation:(NSDictionary *)components;
 - (void)attributedLabel:(TTTAttributedLabel *)label
 didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
 
+///--------------------------------------
+/// @name Link detection callback section
+///--------------------------------------
+
+/**
+ Tells the delegate that the link parsing process has ended.
+
+ @param label The label whose link was selected.
+ */
+- (void)attributedLabelDidEndDetectingLinks:(TTTAttributedLabel *)label;
+
 @end
