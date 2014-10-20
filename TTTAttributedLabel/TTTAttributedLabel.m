@@ -518,13 +518,19 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     if (attributes) {
         NSMutableAttributedString *mutableAttributedString = [self.attributedText mutableCopy];
         for (NSTextCheckingResult *result in results) {
-            [mutableAttributedString addAttributes:attributes range:result.range];
+            BOOL handle = YES;
+            if ([self.delegate respondsToSelector:@selector(attributedLabel:shouldHandleTextCheckingResult:)]) {
+                handle = [self.delegate attributedLabel:self shouldHandleTextCheckingResult:result];
+            }
+            if (handle) {
+                [mutableAttributedString addAttributes:attributes range:result.range];
+                [mutableLinks addObject:result];
+            }
         }
         self.attributedText = mutableAttributedString;
         [self setNeedsDisplay];
     }
-    [mutableLinks addObjectsFromArray:results];
-    
+
     self.links = [NSArray arrayWithArray:mutableLinks];
 }
 

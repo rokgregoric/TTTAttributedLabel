@@ -447,6 +447,19 @@ didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
 ///--------------------------------------
 
 /**
+ Asks the delegate if the detected text checking result should be handled or ignored.
+
+ @discussion If not implemented all detected text checking results will be handled.
+
+ @param label The label whose link was selected.
+ @param result The detected text checking result.
+
+ @return Boolean value representing if the detected text checking result should be handled or ignored.
+ */
+- (BOOL)attributedLabel:(TTTAttributedLabel *)label
+shouldHandleTextCheckingResult:(NSTextCheckingResult *)result;
+
+/**
  Tells the delegate that the link parsing process has ended.
 
  @param label The label whose link was selected.
